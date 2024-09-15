@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yasmim</title>
+    <style>
+    body {
+        background-color: #1a1a1a; /* Fundo escuro */
+        color: #d0d0d0; /* Texto cinza claro */
+        font-family: 'Garamond', serif; /* Fonte com estilo antigo */
+        margin: 0;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    #texto {
+        background-color: #333;
+        border: 1px solid #444;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 600px; /* Limita a largura máxima para grandes telas */
+    }
+
+    input {
+        padding: 10px;
+        border: 1px solid #444;
+        border-radius: 5px;
+        background-color: #222;
+        color: #d0d0d0;
+        width: 100%; /* Preenche a largura do container */
+        box-sizing: border-box;
+    }
+
+    .fancyButton {
+        background-color: #1a1a1a; /* Botões da mesma cor do fundo */
+        color: #d0d0d0; /* Texto do botão em cinza claro */
+        border: 2px solid #333; /* Borda do botão */
+        padding: 10px 20px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.3s, box-shadow 0.3s;
+        border-radius: 5px; /* Borda arredondada */
+    }
+
+    .fancyButton:hover {
+        background-color: #333;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    p {
+        margin: 3px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    #toggleButton {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 10px 10px;
+    }
+
+    .invisibleButton {
+        background-color: transparent;
+        cursor: default; /* Não interativo antes de ser mostrado */
+        border: none;
+        color: transparent;
+    }
+
+    #recompensa {
+        position: absolute;
+        top: 5%;
+        left: 25%;
+        width: 50%;
+        background-color: #2a2a2a;
+        padding: 10px;
+        border: #222 10px solid;
+        border-radius: 10px;
+    }
+    #mensagem-erro{
+        background-color: #333;
+        border: #333 10px solid;
+        border-radius: 10px;
+        width: fit-content;
+        position: absolute;
+        top: 50%;
+        left: 40%;
+    }
+    .bloco{
+        max-width: 10rem;
+        max-height: 10rem;
+        background-color: #000;
+        margin: 10px;
+    }
+    #bloco1{
+        width: 70px;
+        height: 70px;
+    }
+    #bloco2{
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        bottom: 1%;
+        right: 20%;
+    }
+    #bloco3{
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+    }
+    #bloco4{
+        width: 90px;
+        height: 90px;
+        position: absolute;
+        top: 50%;
+        right: 5%;
+    }
+    #bloco5{
+        width: 120px;
+        height: 120px;
+        position: absolute;
+        bottom: 25%;
+        left: 10%;
+    }
+    #textButton{
+        width: 100%;
+        height: 100%;
+    }
+    .container{
+        max-width: 600px;
+        background-color: #333;
+        border: 2px #444 solid;
+        border-radius: 10px;
+        margin: 20px;
+        padding: 20px;
+    }
+    /* Media Queries */
+    @media (max-width: 800px) {
+        body {
+            padding: 10px; /* Menos preenchimento para telas menores */
+        }
+        .puzzle {
+            padding: 15px; /* Menos preenchimento para telas menores */
+            margin: 10px auto; /* Menos margem para ajustar a tela */
+        }
+
+        input {
+            padding: 8px; /* Menos preenchimento para telas menores */
+        }
+
+        button {
+            padding: 8px 16px; /* Menos preenchimento para telas menores */
+        }
+        #bloco5{
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        bottom: 25%;
+        left: 1%;
+        }
+        #bloco4{
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 40%;
+        right: 0%;
+        }
+        #bloco3{
+            display: none;
+        }
+        #bloco2{
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        bottom: 1%;
+        right: 0%;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .puzzle {
+            padding: 18px; /* Ajusta o preenchimento para telas médias */
+        }
+
+        input {
+            padding: 9px; /* Ajusta o preenchimento para telas médias */
+        }
+
+        button {
+            padding: 9px 18px; /* Ajusta o preenchimento para telas médias */
+        }
+    }
+    </style>
+</head>
+<body>
+    <div id="texto">
+        <p>Talvez tudo esteja se perdendo...</p>
+        <p>dessa vez não há uma nova tentativa</p>
+        <p>então que tal seguir em frente?</p>
+        <form id="answerForm">
+            <input type="text" id="answer" required>
+            <button type="submit" class="fancyButton">Enviar</button>
+        </form>
+    </div>
+    <!--Recompensa-->
+    <div id="recompensa" class="hidden">
+        <p>Você conhece a "Cifra de Cesar"? Acho que vamos precisar dela, caso já tenha achado o texto com a escrita embaralhada e o CC?? na frente...</p>
+        <div class="">
+            <h1>Solucionador de Cifra de César</h1>
+            <form id="caesarForm">
+                <label for="ciphertext">Texto Criptografado:</label>
+                <input type="text" id="ciphertext" placeholder="Digite o texto criptografado" required>
+                
+                <label for="shift">Chave:</label>
+                <input type="number" id="shift" placeholder="Digite a chave" required>
+                
+                <button type="button" onclick="decodeCaesar()" class="fancyButton">Decifrar</button>
+            </form>
+            <div id="result" class="result">
+                <h2>Texto Decifrado:</h2>
+                <p id="decodedText"></p>
+            </div>
+        </div>
+    </div>
+    <div id="mensagem-erro" class="hidden">
+        <span id="message"></span>
+    </div>
+    <button id="toggleButton" class="invisibleButton hidden">CC</button>
+    <!--BLOCOS-->
+    <div class="bloco" id="bloco1"></div>
+    <div class="bloco" id="bloco2"></div>
+    <div class="bloco" id="bloco3"></div>
+    <div class="bloco" id="bloco4"><button class="invisibleButton" id="textButton" style="color: #000;" onclick="cliquesDivbutton()">a</button></div>
+    <div class="bloco" id="bloco5"></div>
+    <!--TEXTO FINAL-->
+    <div class="container hidden" id="caixa-texto-final" style="margin-left: 25%;">
+        <p>
+            Dfwaswfoasbhs, tszwn obwjsfgáfwc momo, si rsjsfwo sghof sbhfsuobrc bsggo roho dszc asbcg, si twn c
+            qórwuc hcrc dfo jcqê qvsuof bsggs hslhwbvc aog ohé sbhãc si bsa hwbvo dsbgorc sa qcac gsfwo sggs 
+            hslhc, dofopébg dcf doggof dszog qcwgog, hsbhsw bãc rswlof aiwhc qcadzwqorc s rsgqizdo gs hsjs 
+            ozuia sffc, si rsw asi aálwac dfo tonsf wggc gwbqsfoasbhs, gsw eis dfcjojszasbhs xá rsjs sghof qobgoro
+            rs awa s sggo jow gsf awbvo izhwao jsn hs sbqvsbrc c goqc qca ozuc rc hwdc, gwbhc tozho rs qcac sfo obhsg
+            hwbvoacg iao oawnors aiwhc ouforájsz, dszc asbcg dfo awa.
+            Si as dsfrw bo jwro aowg iao jsn, dcféa eiobrc as fssbqcbhfof sgdsfc hs jsf xibhc qcawuc owbro, odsgof
+            rs si gsf iao dsggco rwtwqwz rs zwrof. CC14
+        </p>
+    </div>
+    <script>
+        // Função para escrever o texto letra por letra
+        function typeMessage(text, element, speed) {
+             let index = 0;
+            function type() {
+                if (index < text.length) {
+                    element.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Função para verificar a resposta e mostrar a recompensa
+        let answerCount = 0; // Variável global para contar o número de respostas corretas
+
+function checkAnswer1() {
+    var answer = document.getElementById('answer').value;
+    var reward = document.getElementById('recompensa');
+    var msgError = document.getElementById('mensagem-erro');
+    var messageElement = document.getElementById('message');
+
+    if (answer === 'vamos') {
+        answerCount++; // Incrementa o contador de respostas corretas
+
+        if (answerCount === 1) {
+            // Primeira resposta correta
+            reward.classList.remove('hidden'); // Exibe a recompensa
+            const button = document.getElementById('toggleButton');
+            button.classList.remove('invisibleButton');
+            button.classList.remove('hidden');
+            button.classList.add('fancyButton'); // Adiciona a classe fancyButton para estilo
+        } else if (answerCount === 2) {
+            // Segunda resposta correta
+            msgError.classList.toggle('hidden');
+            const messageText = "Você já deve ter feito isso...";
+            const typingSpeed = 100;
+            messageElement.textContent = '';
+            typeMessage(messageText, messageElement, typingSpeed);
+            setTimeout(() => {
+                msgError.classList.toggle('hidden')
+            }, 5000)
+        } else {
+            // Caso haja uma terceira ou mais respostas corretas, você pode adicionar lógica adicional aqui
+        }
+    } else {
+        // Resposta incorreta
+        msgError.classList.toggle('hidden');
+        const messageText = "Você deveria dizer \"vamos\"...";
+        const typingSpeed = 100;
+        messageElement.textContent = '';
+        typeMessage(messageText, messageElement, typingSpeed);
+        setTimeout(() => {
+            msgError.classList.toggle('hidden');
+        }, 5000)
+    }
+
+    // Limpar o campo de resposta após verificar
+    document.getElementById('answer').value = '';
+}
+
+        // Função para decifrar a cifra de César
+        function decodeCaesar() {
+             const ciphertext = document.getElementById('ciphertext').value.toUpperCase();
+            const shift = parseInt(document.getElementById('shift').value);
+            const decodedText = document.getElementById('decodedText');
+
+            if (!ciphertext || isNaN(shift)) {
+                alert('Por favor, preencha todos os campos corretamente.');
+                return;
+            }
+
+            const shiftValue = shift % 26; // Garante que o deslocamento esteja dentro do intervalo de 0 a 25
+            let result = '';
+
+            for (let i = 0; i < ciphertext.length; i++) {
+                const char = ciphertext[i];
+
+                if (char >= 'A' && char <= 'Z') {
+                    let code = char.charCodeAt(0) - shiftValue;
+
+                    if (code < 'A'.charCodeAt(0)) {
+                        code += 26; // Ajusta se o código for menor que 'A'
+                    }
+
+                    result += String.fromCharCode(code);
+                } else {
+                    result += char; // Mantém caracteres que não são letras
+                }
+            }
+
+            decodedText.textContent = result;
+        }
+
+         // Adiciona o listener para o botão de toggle
+            const toggleButton = document.getElementById('toggleButton');
+        toggleButton.addEventListener('click', () => {
+            const recompensa = document.getElementById('recompensa');
+            recompensa.classList.toggle('hidden'); // Alterna a classe 'hidden' no elemento
+        });
+
+        // Vincula a função checkAnswer1 ao evento de submissão do formulário
+        const form = document.getElementById('answerForm');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Evita o envio do formulário
+            checkAnswer1();
+        });
+        let cliques = 0;
+        const divButton = document.getElementById('textButton');
+        function cliquesDivbutton(){
+            cliques++;
+            var msgError = document.getElementById('mensagem-erro')
+            var messageElement = document.getElementById('message')
+            if (cliques === 1) {
+                msgError.classList.toggle('hidden');
+                const messageText = "Talvez...?";
+                const typingSpeed = 100;
+                messageElement.textContent = '';
+                typeMessage(messageText, messageElement, typingSpeed);
+                setTimeout(() =>{
+                    msgError.classList.toggle('hidden')
+                }, 2000)
+            }
+            else if (cliques === 2) {
+                msgError.classList.toggle('hidden')
+                const messageText = "Parece uma opção viável...";
+                const typingSpeed = 100;
+                messageElement.textContent = '';
+                typeMessage(messageText, messageElement, typingSpeed);
+                setTimeout(() => {
+                    msgError.classList.toggle('hidden')
+                }, 5000)
+            }
+            else if (cliques === 3) {
+                msgError.classList.toggle('hidden')
+                const messageText = "Você achou a mensagem!!!";
+                const typingSpeed = 100;
+                messageElement.textContent = '';
+                typeMessage(messageText, messageElement, typingSpeed);
+                setTimeout(() => {
+                    msgError.classList.toggle('hidden')
+                    const caixatexto = document.getElementById('caixa-texto-final')
+                    caixatexto.classList.toggle('hidden')
+
+                    const bloco1 = document.getElementById('bloco1')
+                    bloco1.classList.add('hidden')
+                    const bloco2 = document.getElementById('bloco2')
+                    bloco2.classList.add('hidden')
+                    const bloco3 = document.getElementById('bloco3')
+                    bloco3.classList.add('hidden')
+                    const bloco4 = document.getElementById('bloco4')
+                    bloco4.classList.add('hidden')
+                    const bloco5 = document.getElementById('bloco5')
+                    bloco5.classList.add('hidden')
+
+                }, 4000)
+            }
+        }
+    </script>
+</body>
+</html>

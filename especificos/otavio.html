@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otavio</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet-otavio.css" media="screen"/>
+</head>
+<body id="body">
+    <div id="texto-inicial">
+        <p id="messageElement" style="margin: 1rem;">
+        </p>
+        <form id="respostas" onsubmit="checkAnswer(event)">
+            <p for="resposta" style="margin-left: 35%;" id="label">Escreva sua resposta abaixo:</p> <br>
+            <input id="resposta" type="text" placeholder="Resposta aqui."> <br>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <div id="texto-final" class="escondido">
+        <p>
+            SIM CARA, eu sou um merda por isso mas eu procrastinei tanto que você teve que ser prejudicado por isso 
+            apesar disso, você sabe que eu gosto muito de você e vou melhorar isso aqui conforme o tempo passar
+            eu tive umas idéias malucas pra isso e sinceramente sei que consigo fazer algo muito mais foda pra você 
+            mas vc sabe como que ta a situação, são 04:15 agora inclusive, eu vou só postar isso e dormir, eu falei só
+            de mim nessa porra pq eu n aceito que seja só isso que você vá ter então n tem texto por enquanto, só um 
+            gostinho do que está por vir pra você, confia em mim (nem tanto).
+        </p>
+    </div>
+    <script>
+        function typeMessage(text, element, speed) {
+            let index = 0;
+            function type() {
+                if (index < text.length) {
+                    element.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+        const messageElement = document.getElementById('messageElement');
+        const messageText = 'Olá meu querido amigo, espero que tenha trazido seu Sol contigo, você vai precisar... espera... de qual jogo isso vem mesmo?';
+        const typingSpeed = 50;
+        typeMessage(messageText, messageElement, typingSpeed);
+
+        function checkAnswer(event) {
+            event.preventDefault(); // Previne o envio do formulário
+            const userInput = document.getElementById('resposta').value.toLowerCase();
+            const blackout = document.getElementById('blackout');
+            
+            if (userInput === 'oneshot') {
+                const messageElement = document.getElementById('messageElement');
+                const messageText = 'Isso isso, você está certo, OneShot! Esse jogo me deixou maravilhado quando eu joguei pela primeira vez...';
+                const typingSpeed = 50;
+                messageElement.textContent = '';
+                typeMessage(messageText, messageElement, typingSpeed);
+                setTimeout(() => {
+                    console.log('-----NÃO COMPARTILHAR-----')
+                    console.log('Senha: 12345mortal')
+                    console.log('--------------------------')
+                    const label = document.getElementById('label')
+                    label.textContent = 'Digite a senha abaixo:';
+                    const messageText = 'Agora parecemos precisar de uma senha... onde poderiamos encontrar ela, Otávio?'
+                    const typingSpeed = 50;
+                    messageElement.textContent = '';
+                    typeMessage(messageText, messageElement, typingSpeed);
+                }, 10000)
+            }
+            else if (userInput === '12345mortal') {
+                const messageText = 'Olha! você parece ter descoberto a senha! como é que você sabe de tanta coisa, hã?';
+                messageElement.textContent = '';
+                typeMessage(messageText, messageElement, typingSpeed);
+                 setTimeout(() =>{
+                    alert('Senha correta!')
+                    const textofinal = document.getElementById('texto-final');
+                    textofinal.classList.toggle('escondido')
+                }, 5000)
+                        
+                //aqui o sono começou a bater pesado, preciso terminar e postar logo
+                //eu nao sei o que colocar aqui, puta merda
+
+            }
+        }
+    </script>
+</body>
+</html>

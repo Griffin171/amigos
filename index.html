@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto 12/9</title>
+    <script>
+        function verificarERedirecionar(event) {
+            // Previne o comportamento padrão de submissão do formulário
+            event.preventDefault();
+            
+            // Obtém o valor do input
+            const assinatura = document.getElementById('assinatura').value.trim().toLowerCase();
+
+            // Verifica o valor e redireciona conforme necessário
+            if (assinatura === 'yaya' || assinatura === 'yas' || assinatura === 'yasmim') {
+                window.location.href = 'especificos/yas.html';
+            } else if (assinatura === 'otavio' || assinatura === 'Otavio' || assinatura === 'monociclo') {
+                window.location.href = 'especificos/otavio.html';
+            } else if(assinatura === ''){
+                alert('Preencha a sua assinatura!')
+            } else if(assinatura === 'fremo' || assinatura === 'francisco'){
+                alert('Ta fazendo o que aqui? se mata pedofil*');
+            } else {
+                alert('A assinatura não corresponde as pessoas selecionadas.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="first-body">
+        <h1 id="titulo" style="margin: 0; margin-bottom: 3rem;">Evento Teste</h1>
+        <p id="main-text" style="margin: 0; width: 30rem; margin-bottom: 3rem; font-size: 1.20rem;">Bom, hoje quem
+            está aqui presente será um beta tester, talvez o único, talvez o primeiro de muitos mas continua sendo
+            alguém importante, você está sendo usado para testar possíveis erros neste projeto e também um pouco
+            pela diversão que poderá encontrar pelo curto caminho que vem por aí, no caso de qualquer erro, você 
+            sabe quem comunicar.
+        </p>
+        <p style="opacity: 0.5; color: white; margin: 0; margin-bottom: 0.1rem;">Quem é você?...</p>
+        <form onsubmit="verificarERedirecionar(event)" style="margin: 0;">
+            <input type="text" id="assinatura" name="assinatura" style="border-color: gray; background-color: black; color: white;">
+            <button type="submit" style="background-color: black; border-color: white; color: white;">Entrar</button>
+        </form>
+        <p style="color: black;">Tomem cuidado.</p>
+        <p class="segredo" id="fp">Rkvfgr nytb dhr rh cbffn snmre cen gr gre? </p>
+        <p class="segredo" id="chave">CC13</p>
+    </div>
+
+    <!--
+    18:40 01/09
+    MLK EU TENHO MUITO POUCO TEMPO CARA, SERÁ QUE VOU CONSEGUIR FAZER NESSE TEMPO?
+    eu ainda tenho que deixar essa porra responsiva pq ela usa o celular né, meu deus
+
+    18:51 01/09
+    to tentando usar a unidade de medida "rem" em teoria era pra dar alguma ajuda mas o certo seria fazer
+    media querry, eu n tenho tempo pra fazer isso
+
+    00:32 04/09
+    tentei colocar um template de popup do windows xp pra conter o texto mas não deu certo por dar interferencia
+    com os segredos, talvez eu deva tentar uma opção que fique mais justo no texto
+
+    00:58 04/09
+    o intuito disso foi mudado completamente, eu preciso me desenrolar com as coisas agora porém o maior problema
+    continua sendo media querry e dessa vez é pior mas eu tenho tempo pelo menos
+
+    01:26 05/09
+    eu tenho o inicio do site da yasmim pelo menos, eu sei que ela não vai gostar então eu vou só esplahar uns
+    quadrados pela tela de forma que não atrapalhem o layout do solucionador por exemplo e um dele vai precisar de
+    uma quantidade especifica de cliques, tipo 5 cliques e ele vai "abrir" mostrando um botão que vai liberar o
+    texto codificado com cifra de cesar, colocando o texto no solucionador ele vai dar uma resposta pra colocar no
+    input inicial e esse input vai abrir um popup com o texto final
+    -->
+
+    <style>
+        h1{
+            color: white;
+            font-family: 'Trebuchet MS', sans-serif;
+        }
+        p{
+            color: white;
+            font-family: 'Andale Mono', monospace;
+        }
+        body{
+            margin: 0.625rem;
+            padding: 0;
+            background-color: gray;
+        }
+        .segredo{
+            color: black;
+        }
+        #fp{
+            position: absolute;
+            top: 6.25rem;
+            left: 3rem;
+        }
+        #chave{
+            position: absolute;
+            top: 7.50rem;
+            left: 6rem;
+        }
+        #first-body{
+            width: 100%;
+            height: 38.8rem;
+            background-color: black;
+            margin: 0;
+            display: grid;
+            place-content: center;
+            place-items: center;
+        }
+    </style>
+</body>
+</html>
